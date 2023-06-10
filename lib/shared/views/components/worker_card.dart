@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:villages/extension/dialogs.dart';
+import 'package:villages/extension/string_extension.dart';
 import 'package:villages/model/workers.dart';
-
+import 'package:villages/shared/constants/constant.dart';
+import 'package:villages/shared/views/components/show_telphone.dart';
 import '../../../assets/assets.dart';
 import '../../../assets/colors.dart';
+
 import '../layouts/make_apointment/make_apointment_page.dart';
 
 class WorkerCard extends StatelessWidget {
@@ -22,7 +27,17 @@ class WorkerCard extends StatelessWidget {
       fontWeight: FontWeight.bold,
       fontSize: 15,
     );
-    return Container(
+
+    return InkWell(
+      onTap: () {
+        AppDialogs.showRationgDialog(
+          rateWorkerAPI,
+          worker!.id!,
+          context,
+        );
+        // openTelephoneDialog(context, worker!.phone!, worker!.name!);
+      },
+      child: Container(
         margin: const EdgeInsets.all(
           15,
         ),
@@ -55,9 +70,15 @@ class WorkerCard extends StatelessWidget {
                     ),
                     height: 120,
                     width: 120,
-                    child: worker!.imageUrl != null
-                        ? Image.asset(
-                            worker!.imageUrl!,
+                    child: worker!.photo != null
+                        ? CachedNetworkImage(
+                            imageUrl: worker!.photo!.toBackendImage,
+                            fit: BoxFit.fill,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           )
                         : Image.asset(
                             Assets.elctWorker,
@@ -97,19 +118,25 @@ class WorkerCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.phone,
-                        color: InUseColors.componentsColor,
-                        size: 30,
-                      ),
-                      Text(
-                        worker!.phone!,
-                        textDirection: TextDirection.rtl,
-                        style: textStyle,
-                      ),
-                    ],
+                  InkWell(
+                    onTap: () {
+                      openTelephoneDialog(
+                          context, worker!.phone!, worker!.name!);
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.phone,
+                          color: InUseColors.componentsColor,
+                          size: 30,
+                        ),
+                        Text(
+                          worker!.phone!,
+                          textDirection: TextDirection.rtl,
+                          style: textStyle,
+                        ),
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
@@ -119,7 +146,7 @@ class WorkerCard extends StatelessWidget {
                         size: 30,
                       ),
                       Text(
-                        worker!.phone!,
+                        worker!.address!,
                         textDirection: TextDirection.rtl,
                         style: textStyle,
                       ),
@@ -158,6 +185,8 @@ class WorkerCard extends StatelessWidget {
               )
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

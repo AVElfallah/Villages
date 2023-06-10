@@ -3,7 +3,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:villages/assets/colors.dart';
 
 import 'package:villages/model/teacher.dart';
+import 'package:villages/shared/constants/constant.dart';
 import 'package:villages/shared/views/components/teacher_school_card.dart';
+
+import '../../../../extension/dialogs.dart';
 
 class SchoolPreviewPage extends StatelessWidget {
   const SchoolPreviewPage({
@@ -28,6 +31,7 @@ class SchoolPreviewPage extends StatelessWidget {
           context,
           i,
         ) {
+          var teacher2 = teachers![i];
           if (i == 0) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -53,14 +57,32 @@ class SchoolPreviewPage extends StatelessWidget {
                   indent: 65.w,
                   endIndent: 6.5.w,
                 ),
-                TeacherSchoolCard(
-                  teacher: teachers![i],
+                InkWell(
+                  onDoubleTap: () {
+                    AppDialogs.showRationgDialog(
+                      rateTeacherAPI,
+                      teacher2.id!,
+                      context,
+                    );
+                  },
+                  child: TeacherSchoolCard(
+                    teacher: teacher2,
+                  ),
                 ),
               ],
             );
           } else {
-            return TeacherSchoolCard(
-              teacher: teachers![i],
+            return InkWell(
+              onDoubleTap: () {
+                AppDialogs.showRationgDialog(
+                  rateTeacherAPI,
+                  teacher2.id!,
+                  context,
+                );
+              },
+              child: TeacherSchoolCard(
+                teacher: teachers![i],
+              ),
             );
           }
         },

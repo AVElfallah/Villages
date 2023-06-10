@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
       );
     timer = Timer.periodic(const Duration(milliseconds: 2500), (timer) {
       Navigator.of(context).pushReplacementNamed(
-        AppRouter.welcomeScreen.name!,
+        AppRouter.welcomeScreen,
       );
     });
   }

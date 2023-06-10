@@ -37,7 +37,7 @@ class SocialServicesScreen extends StatelessWidget {
                   serviceSubTitle: '',
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AppRouter.villageWorkersScreen.name!,
+                      AppRouter.villageWorkersScreen,
                     );
                   },
                 ),
@@ -48,9 +48,7 @@ class SocialServicesScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (ctx) => SuperMarketPage(
-                          supermarket: SupermarketsData.i.supermarkets,
-                        ),
+                        builder: (ctx) => const SuperMarketPage(),
                       ),
                     );
                   },
@@ -67,7 +65,7 @@ class SocialServicesScreen extends StatelessWidget {
                   serviceSubTitle: '',
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AppRouter.sportClubPage.name!,
+                      AppRouter.sportClubPage,
                     );
                   },
                 ),

@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:villages/model/teacher.dart';
-
-import '../../../assets/assets.dart';
+import 'package:villages/extension/string_extension.dart';
 import '../../../assets/colors.dart';
 
 class TeacherSchoolCard extends StatelessWidget {
@@ -38,6 +38,9 @@ class TeacherSchoolCard extends StatelessWidget {
               children: [
                 Text(
                   "أ/${teacher!.name}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                     color: InUseColors.componentsColor,
@@ -45,17 +48,26 @@ class TeacherSchoolCard extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-                Text(
-                  "المادة العلمية:${teacher!.subject}",
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(
-                    color: InUseColors.componentsColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                SizedBox(
+                  width: 50.w,
+                  child: Text(
+                    "المادة العلمية:${teacher!.subject}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                      color: InUseColors.componentsColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
                 Text(
-                  "المرحلة:${teacher!.educationalLevel}",
+                  "${teacher!.stage}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                   textAlign: TextAlign.right,
                   style: const TextStyle(
                     color: InUseColors.componentsColor,
@@ -66,7 +78,7 @@ class TeacherSchoolCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${teacher!.rating}",
+                      "${teacher!.rateAvge()}",
                       textAlign: TextAlign.right,
                       style: const TextStyle(
                         color: InUseColors.componentsColor,
@@ -88,13 +100,11 @@ class TeacherSchoolCard extends StatelessWidget {
               padding: const EdgeInsets.all(
                 10,
               ),
-              child: CircleAvatar(
-                radius: 75,
-                backgroundImage: AssetImage(
-                  teacher!.gander == 0
-                      ? Assets.teacherMan
-                      : Assets.teacherWoman,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: (teacher!.photo ?? '').toBackendImage,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

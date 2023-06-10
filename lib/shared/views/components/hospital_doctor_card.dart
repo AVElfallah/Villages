@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:villages/model/hospital_doctor.dart';
+import 'package:villages/extension/string_extension.dart';
+import 'package:villages/model/doctors/h_doctor.dart';
 import 'package:villages/shared/views/layouts/make_apointment/make_apointment_page.dart';
 
-import '../../../assets/assets.dart';
 import '../../../assets/colors.dart';
 
 class HospitalDoctorCard extends StatelessWidget {
@@ -12,12 +13,12 @@ class HospitalDoctorCard extends StatelessWidget {
     this.doctor,
     this.onTap,
   }) : super(key: key);
-  final HospitalDoctorModel? doctor;
+  final HDoctor? doctor;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h,
+      height: 22.h,
       margin: const EdgeInsets.all(
         25,
       ),
@@ -49,7 +50,7 @@ class HospitalDoctorCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  doctor!.specialization!,
+                  doctor!.clinicName!,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: InUseColors.componentsColor,
@@ -63,7 +64,9 @@ class HospitalDoctorCard extends StatelessWidget {
                       color: Colors.amber,
                     ),
                     Text(
-                      doctor!.rating.toString(),
+                      doctor!.rateAvg.toString() == "NaN"
+                          ? "0"
+                          : doctor!.rateAvg.toString(),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: InUseColors.componentsColor,
@@ -101,11 +104,11 @@ class HospitalDoctorCard extends StatelessWidget {
             ),
           ),
           Flexible(
-            child: Image.asset(
-              Assets.doctorFace,
-              height: 16.h,
-            ),
-          ),
+              child: CachedNetworkImage(
+            imageUrl: doctor!.photo!.toBackendImage,
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          )),
         ],
       ),
     );

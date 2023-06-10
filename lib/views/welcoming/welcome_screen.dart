@@ -33,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 inActiveButtonText: 'تخطي',
                 onPressedInActiveButton: () {
                   Navigator.of(context).pushNamed(
-                    AppRouter.villageReviewScreen.name!,
+                    AppRouter.villageReviewScreen,
                   );
                 },
                 welcomeTitle: 'نسعى إلى الحفاظ علي البيئة والتنمية معا ',
@@ -48,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 activeButtonText: 'ابدأ الأن',
                 onPressedActiveButton: () {
                   Navigator.of(context).pushReplacementNamed(
-                    AppRouter.servicesMainScreen.name!,
+                    AppRouter.loginView,
                   );
                 },
                 welcomeTitle: 'قرية رأس الخليج البلد ',

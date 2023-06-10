@@ -29,7 +29,7 @@ class MedicalServicesScreen extends StatelessWidget {
                   serviceSubTitle: "",
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AppRouter.villageHospitalPage.name!,
+                      AppRouter.villageHospitalPage,
                     );
                   },
                 ),
@@ -39,7 +39,7 @@ class MedicalServicesScreen extends StatelessWidget {
                   serviceSubTitle: '',
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AppRouter.emergencyPage.name!,
+                      AppRouter.emergencyPage,
                     );
                   },
                 ),
@@ -49,7 +49,7 @@ class MedicalServicesScreen extends StatelessWidget {
                   serviceSubTitle: '',
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AppRouter.spcialDoctorsPage.name!,
+                      AppRouter.spcialDoctorsPage,
                     );
                   },
                 ),

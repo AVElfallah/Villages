@@ -7,7 +7,9 @@ class AppointmentCard extends StatelessWidget {
     Key? key,
     this.day,
     this.from,
+    this.text,
     this.to,
+    this.isShortenText = false,
     this.isActive = true,
     this.size = const Size(
       150,
@@ -15,7 +17,8 @@ class AppointmentCard extends StatelessWidget {
     ),
   }) : super(key: key);
   final String? day;
-
+  final bool isShortenText;
+  final String? text;
   final Size? size;
   final String? from;
   final String? to;
@@ -52,18 +55,32 @@ class AppointmentCard extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              isActive! ? 'من\n $from \nحتي\n $to' : 'لايوجد\nمواعيد الان',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.w900,
-                fontSize: 12,
+          if (!isShortenText)
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                isActive! ? 'من\n $from \nحتي\n $to' : 'لايوجد\nمواعيد الان',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 12,
+                ),
               ),
             ),
-          ),
+          if (isShortenText)
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                isActive! ? text! : 'لايوجد\nمواعيد الان',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 12,
+                ),
+              ),
+            ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(

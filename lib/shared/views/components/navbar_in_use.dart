@@ -74,19 +74,19 @@ class _NavbarInUseState extends State<NavbarInUse> {
                   onTap: (index) {
                     if (index == 0 && page != index) {
                       Navigator.of(context).pushReplacementNamed(
-                        AppRouter.servicesMainScreen.name!,
+                        AppRouter.servicesMainScreen,
                       );
                     } else if (index == 1 && page != index) {
                       Navigator.of(context).pushReplacementNamed(
-                        AppRouter.selectedVillageScreen.name!,
+                        AppRouter.villageServicesScreen,
                       );
                     } else if (index == 2 && page != index) {
                       Navigator.of(context).pushReplacementNamed(
-                        AppRouter.emergencyPage.name!,
+                        AppRouter.emergencyPage,
                       );
                     } else if (index == 3 && page != index) {
                       Navigator.of(context).pushReplacementNamed(
-                        AppRouter.appHelpingPage.name!,
+                        AppRouter.appHelpingPage,
                       );
                     }
                   },

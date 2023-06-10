@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -5,15 +6,18 @@ import '../../../assets/assets.dart';
 import '../../../assets/colors.dart';
 
 class EducationalServiceCardWidget extends StatelessWidget {
-  const EducationalServiceCardWidget(
-      {super.key,
-      this.imageUrl,
-      this.serviceTitle,
-      this.onTap,
-      this.serviceSubTitle});
+  const EducationalServiceCardWidget({
+    super.key,
+    this.imageUrl,
+    this.serviceTitle,
+    this.onTap,
+    this.serviceSubTitle,
+    this.isOnlineImage = false,
+  });
   final String? imageUrl;
   final String? serviceTitle;
   final String? serviceSubTitle;
+  final bool? isOnlineImage;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -27,12 +31,28 @@ class EducationalServiceCardWidget extends StatelessWidget {
               child: Card(
                 color: InUseColors.backgroundColor,
                 elevation: 1,
-                child: Image.asset(
-                  imageUrl ?? Assets.worker,
-                  height: 20.h,
-                  //width: 40.w,
-                  fit: BoxFit.cover,
-                ),
+                child: !isOnlineImage!
+                    ? Image.asset(
+                        imageUrl ?? Assets.worker,
+                        height: 20.h,
+                        //width: 40.w,
+                        fit: BoxFit.cover,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: imageUrl!,
+                        height: 20.h,
+                        //width: 40.w,
+                        fit: BoxFit.cover,
+
+                        errorWidget: (context, url, error) {
+                          return Image.asset(
+                            Assets.worker,
+                            height: 20.h,
+                            //width: 40.w,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
               ),
             ),
             Text(

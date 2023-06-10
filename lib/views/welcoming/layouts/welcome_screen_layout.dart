@@ -155,7 +155,7 @@ class WelcomeScreenLayout extends StatelessWidget {
                           ),
                           child: Text(
                             activeButtonText!,
-                            style: context.textTh.headline5!.copyWith(
+                            style: context.textTh.headlineSmall!.copyWith(
                               color: Colors.white,
                             ),
                           ),
@@ -187,7 +187,7 @@ class WelcomeScreenLayout extends StatelessWidget {
                           ),
                           child: Text(
                             inActiveButtonText!,
-                            style: context.textTh.headline5!.copyWith(
+                            style: context.textTh.headlineSmall!.copyWith(
                               color: Colors.white,
                             ),
                           ),

@@ -5,12 +5,13 @@ import '../../../assets/assets.dart';
 import '../../../assets/colors.dart';
 
 class SocialServiceCardWidget extends StatelessWidget {
-  const SocialServiceCardWidget(
-      {super.key,
-      this.imageUrl,
-      this.serviceTitle,
-      this.onTap,
-      this.serviceSubTitle});
+  const SocialServiceCardWidget({
+    super.key,
+    this.imageUrl,
+    this.serviceTitle,
+    this.onTap,
+    this.serviceSubTitle,
+  });
   final String? imageUrl;
   final String? serviceTitle;
   final String? serviceSubTitle;

@@ -8,16 +8,18 @@ class HelpCardWidget extends StatelessWidget {
     this.title,
     this.onTap,
     this.icon,
+    this.firstIcon,
   }) : super(key: key);
   final String? title;
   final void Function()? onTap;
-  final IconData? icon;
+  final IconData? icon, firstIcon;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-      ),
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 2, color: InUseColors.componentsColor)),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: ListTile(
         onTap: onTap ?? () {},
         tileColor: InUseColors.appBarColor,
@@ -26,11 +28,22 @@ class HelpCardWidget extends StatelessWidget {
             5,
           ),
         ),
-        title: Text(
-          title ?? 'no title',
-          style: const TextStyle(
-            color: InUseColors.componentsColor,
-          ),
+        title: Row(
+          children: [
+            Icon(
+              firstIcon,
+              color: Colors.green,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              title ?? 'no title',
+              style: const TextStyle(
+                color: InUseColors.componentsColor,
+              ),
+            ),
+          ],
         ),
         trailing: Icon(
           icon ?? Icons.abc,
